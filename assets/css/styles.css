@@ -4,14 +4,14 @@ body {
     background-size: cover;
 }
 
-
-}
 h1.text-center {
     color: #fff;
 }
+
 h1 {
     color: #fff;
 }
+
 h1,
 h2,
 h3,
@@ -20,22 +20,28 @@ h5,
 h6 {
     color: #fff;
 }
+
 button.btn.btn-success.btn-block.btn-lg {
     margin-top: 25px;
 }
+
 div.col-md-12 {
     margin: 5px;
 }
+
 div>.question-container {
     margin: 80px auto;
 }
+
 a {
     color: #fff;
     text-decoration: none;
 }
+
 a {
     margin: 15px auto;
 }
+
 a,
 a:active,
 a:hover,
@@ -44,7 +50,23 @@ a:focus {
     outline: 0;
     text-decoration: none;
 }
+
 a:hover,
 a:focus {
     background: #4CD964;
+}
+
+.choice_container_right {
+    float: right;
+    color: #ddd;
+    background: #1D62F0;
+    padding: 15px;
+}
+
+.choice_container_left {
+    float: left;
+    /*border:dotted;*/
+    color: #ddd;
+    background: #1D62F0;
+    padding: 15px;
 }
