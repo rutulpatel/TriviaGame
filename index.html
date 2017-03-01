@@ -8,7 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-    <link rel="stylesheet" href="assets/css/styles.min.css">
+    <link rel="stylesheet" href="assets/css/Login-Form-Dark.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
 </head>
 
 <body>
@@ -20,29 +21,37 @@
                     <h1 class="text-uppercase text-center">Trivia Game</h1>
                     <hr>
                 </div>
-                <div class="col-md-12">
-                    <h2 class="text-center">Question </h2></div>
+                <div class="col-md-12 question-container">
+                    <h2 class="text-center">Question </h2>
+                </div>
             </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" data-bs-hover-animate="pulse">
-                    <h3 class="text-center">Choice 1 </h3></div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" data-bs-hover-animate="pulse">
-                    <h3 class="text-center">Choice 1 </h3></div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" data-bs-hover-animate="pulse">
-                    <h3 class="text-center">Choice 3 </h3></div>
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12" data-bs-hover-animate="pulse">
-                    <h3 class="text-center">Choice 4</h3></div>
+
+                <a href="#" class="col-lg-4 col-lg-push-1 col-md-4 col-md-push-1 col-sm-4 col-sm-push-1 col-xs-10 col-xs-push-1 choice_container_left" data-bs-hover-animate="pulse">
+                    <h3 class="text-center">Choice 1 </h3>
+                </a>
+                <a href="#" class="col-lg-4 col-lg-pull-1 col-md-4 col-md-pull-1 col-sm-4 col-sm-pull-1 col-xs-10 col-xs-pull-1 choice_container_right" data-bs-hover-animate="pulse">
+                    <h3 class="text-center">Choice 2 </h3>
+                </a>
             </div>
             <div class="row">
-                <div class="col-md-12">
-                    <button class="btn btn-success btn-block btn-lg" type="submit" disabled="disabled">Submit </button>
+                <a href="#" class="col-lg-4 col-lg-push-1 col-md-4 col-md-push-1 col-sm-4 col-sm-push-1 col-xs-10 col-xs-push-1 choice_container_left" data-bs-hover-animate="pulse">
+                    <h3 class="text-center">Choice 3</h3>
+                </a>
+                <a href="#" class="col-lg-4 col-lg-pull-1 col-md-4 col-md-pull-1 col-sm-4 col-sm-pull-1 col-xs-10 col-xs-pull-1 choice_container_right" data-bs-hover-animate="pulse">
+                    <h3 class="text-center">Choice 4 </h3>
+                </a>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    <button class="btn btn-success btn-lg" type="submit" style="/*text-align:center;*//*margin:auto;*/padding-right:50px;padding-left:50px;padding-top:10px;padding-bottom:10px;">Submit </button>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="assets/js/script.min.js"></script>
+    <script src="assets/js/bs-animation.js"></script>
 </body>
 
 </html>
