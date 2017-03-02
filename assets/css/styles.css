@@ -39,7 +39,7 @@ a {
 }
 
 a {
-    margin: 15px auto;
+    float: none;
 }
 
 a,
@@ -56,16 +56,22 @@ a:focus {
     background: #4CD964;
 }
 
-.choice_container_right {
+.choice_container {
     float: right;
     color: #ddd;
     background: #1D62F0;
     padding: 15px;
 }
 
-.choice_container_left {
+.choice_container {
     float: left;
     /*border:dotted;*/
+    color: #ddd;
+    background: #1D62F0;
+    padding: 15px;
+}
+
+.choice {
     color: #ddd;
     background: #1D62F0;
     padding: 15px;
