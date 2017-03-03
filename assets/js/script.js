@@ -6,6 +6,8 @@ $(function() {
     var choice3Id = "#choice3";
     var choice4Id = "#choice4";
     var questionId = "#question";
+    var queContainerClass = ".question-container";
+    var ansContainerClass = ".answer-container";
     var data = {
         1: {
             question: "In what place was Christmas once illegal?",
@@ -60,13 +62,33 @@ $(function() {
 
     }
 
+    var triviaHtmlComponents = {
+        addQuestion: function(parentContainer, childText, childId) {
+            var h2Component = $("<h2>").attr("id", childId).text(childText);
+            $(parentContainer).html(h2Component);
+        },
+        choiceClasses: "col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 choice",
+        addAnswers: function(parentContainer, childText, childId) {
+            var aComponent = $("<a>").attr("class", this.choiceClasses)
+                .attr("id", childId)
+                .attr("href", "#")
+                .attr("data-bs-hover-animate", "pulse")
+                .text(childText);
+            var h3Component = $("<h3>").html(aComponent);
+            var divComponent = $("<div>").attr("class", "row").html(h3Component);
+            $(parentContainer).append(divComponent);
+        }
+    };
+
     var triviaGame = {
         questionNumber: 0,
         loadData: function(dataObj) {
             $(questionId).text(dataObj.question);
-            for (var i = 1; i <= 4; i++) {
-                console.log(dataObj.choices[i - 1]);
-                $("#choice" + i).text(dataObj.choices[i - 1]);
+            triviaHtmlComponents.addQuestion(queContainerClass, dataObj.question, "question");
+            for (var i = 0; i < dataObj.choices.length; i++) {
+                console.log(dataObj.choices[i]);
+                triviaHtmlComponents.addAnswers(ansContainerClass, dataObj.choices[i], "choice" + (i + 1));
+                //$("#choice" + i).text(dataObj.choices[i]);
             }
         },
         checkAnswer: function() {
@@ -74,9 +96,9 @@ $(function() {
                 console.log($(this).text());
             });
         }
-
     };
 
     triviaGame.loadData(data["1"]);
-    triviaGame.checkAnswer();
+    //htmlComponents.addAnswers(".answer-container", "choice", "choice5");
+
 });
