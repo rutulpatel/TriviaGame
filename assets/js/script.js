@@ -72,13 +72,32 @@ $(function() {
             var aComponent = $("<a>").attr("class", this.choiceClasses)
                 .attr("id", childId)
                 .attr("href", "#")
-                .attr("data-bs-hover-animate", "pulse")
+                .attr("data-bs-hover-animate", "pulse") 
                 .text(childText);
             var h3Component = $("<h3>").html(aComponent);
             var divComponent = $("<div>").attr("class", "row").html(h3Component);
             $(parentContainer).append(divComponent);
         }
     };
+
+    var timerInterval;
+    var gameTimer = {
+        time: 0,
+        startTimer: function() {
+            timerInterval = setInterval(gameTimer.countTimer, 1000);
+        },
+        stopTimer: function() {
+            clearInterval(timerInterval);
+        },
+        resetTimer: function() {
+            gameTimer.time = 0;
+        },
+        countTimer: function() {
+            gameTimer.time++;
+            console.log(gameTimer.time);
+            $("#timeRem").text(gameTimer.time);
+        }
+    }
 
     var triviaGame = {
         questionNumber: 0,
@@ -98,6 +117,7 @@ $(function() {
         }
     };
 
+    gameTimer.startTimer();
     triviaGame.loadData(data["1"]);
     //htmlComponents.addAnswers(".answer-container", "choice", "choice5");
 
