@@ -5,6 +5,8 @@ $(function() {
     var queContainerClass = ".question-container";
     var ansContainerClass = ".answer-container";
     var ranOutOfTime = false;
+    var correctCount = 0;
+    var incorrectCount = 0;
     var data = {
         1: {
             id: 1,
@@ -80,8 +82,13 @@ $(function() {
             var divComponent = $("<div>").attr("class", "row").html(h3Component);
             $(parentContainer).append(divComponent);
         },
-        showAnswer: function() {
-
+        showAnswer: function(parentContainer, text) {
+            $(parentContainer).html("");
+            var divComponent = $("<div>");
+            divComponent.attr("class", "jumbotron text-success");
+            divComponent.css("background", "#2980ef");
+            divComponent.html(text);
+            $(parentContainer).append(divComponent);
         }
     };
 
@@ -145,16 +152,27 @@ $(function() {
             }
             if (ansSelected === data[$(questionId).attr("que-num")].answer) {
                 console.log("Your answer is correct");
-                ranOutOfTime = false
+                ranOutOfTime = false;
+                correctCount++;
             } else {
                 console.log("Your answer is incorrect");
                 ranOutOfTime = true;
+                incorrectCount++;
             }
 
             if ((parseInt($(questionId).attr("que-num")) + 1) < 6) {
                 triviaGame.loadData(data[(parseInt($(questionId).attr("que-num")) + 1)]);
             } else {
                 //CODE GAME OVER HERE
+                var msgHTML = "<h2>Game Over</h2><br>" +
+                    "<h3>You answered " + correctCount + " correct </h3><br>" +
+                    "<h3>& " + incorrectCount + " wrong answers</h3><br>" +
+                    "";
+                triviaHtmlComponents.showAnswer(ansContainerClass, msgHTML);
+                console.log("Game over");
+                console.log("Correct answers : " + correctCount);
+                console.log("Incorrect answers : " + incorrectCount);
+
             }
 
         },
