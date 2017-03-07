@@ -88,7 +88,7 @@ $(function() {
             var divComponent = $("<div>").attr("class", "row").html(h3Component);
             $(parentContainer).append(divComponent);
         },
-        showAnswer: function(parentContainer, buttonId, buttonText, text) {
+        showAnswer: function(parentContainer, buttonId, buttonText, text, backgroundColor) {
             $(parentContainer).html("");
             var divComponent = $("<div>");
             divComponent.attr("class", "jumbotron text-success");
@@ -178,7 +178,7 @@ $(function() {
             if (gameTimer.time >= 15) {
                 ranOutOfTime = true;
                 console.log(gameTimer.time);
-                gameTimer.stopTimer();
+                gameTimer.resetTimer();
                 msg += "<h2>You are out of time, here's the answer...</h2><br>";
             } else {
                 if (ansSelected === dataObj.answer) {
