@@ -165,7 +165,17 @@ $(function() {
         },
         submitClicked: function() {
             $("#submit").on("click", function() {
-                triviaGame.loadData(data[(parseInt($(questionId).attr("que-num")) + 1)]);
+                console.log(parseInt($(questionId).attr("que-num")) + 1);
+                console.log(Object.keys(data).length);
+                //loads next question
+                if ((parseInt($(questionId).attr("que-num")) + 1) >= ((Object.keys(data).length) + 1)) {
+                    msg = "<h2>Game Over</h2><br>" +
+                        "<h3>You answered " + correctCount + " correct & " + incorrectCount + " wrong answers</h3><br>";
+                    triviaHtmlComponents.showAnswer(ansContainerClass, "restart", "Restart", msg);
+                    triviaGame.submitClicked();
+                } else {
+                    triviaGame.loadData(data[(parseInt($(questionId).attr("que-num")) + 1)]);
+                }
             });
             $("#restart").on("click", function() {
                 triviaGame.startGame();
@@ -191,15 +201,8 @@ $(function() {
                     incorrectCount++;
                 }
             }
-
-            if ((parseInt($(questionId).attr("que-num")) + 1) < 6) {
-                msg += "<h3>" + dataObj.answerDescription + "</h3>";
-                triviaHtmlComponents.showAnswer(ansContainerClass, "submit", "Okay", msg);
-            } else {
-                msg = "<h2>Game Over</h2><br>" +
-                    "<h3>You answered " + correctCount + " correct & " + incorrectCount + " wrong answers</h3><br>";
-                triviaHtmlComponents.showAnswer(ansContainerClass, "restart", "Restart", msg);
-            }
+            msg += "<h3>" + dataObj.answerDescription + "</h3>";
+            triviaHtmlComponents.showAnswer(ansContainerClass, "submit", "Okay", msg);
             triviaGame.submitClicked();
         },
         startGame: function() {
