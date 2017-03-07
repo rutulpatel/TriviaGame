@@ -17,7 +17,8 @@ $(function() {
                 "Brazil",
                 "Russia"
             ],
-            answer: "England"
+            answer: "England",
+            answerDescription: "All Christmas activities, including dancing, seasonal plays, games, singing carols, cheerful celebration and especially drinking were banned by the Puritan-dominated Parliament of England in 1644, with the Puritans of New England following suit."
         },
         2: {
             id: 2,
@@ -28,7 +29,8 @@ $(function() {
                 "Gardening",
                 "Working on a computer"
             ],
-            answer: "Bathing"
+            answer: "Bathing",
+            answerDescription: "In California, It is Illegal to Eat an Orange in Your Bathtub. This has to be the most bizarre law I read from California. It was made around 1920, when people believed that the citric acid in the orange would mix with the natural bath oils and would create a highly explosive mixture."
         },
         3: {
             id: 3,
@@ -39,7 +41,8 @@ $(function() {
                 "Infinity",
                 "1,000,000"
             ],
-            answer: "Infinity"
+            answer: "Infinity",
+            answerDescription: "Any number divided by 0 results in Inifinite number."
         },
         4: {
             id: 4,
@@ -50,7 +53,8 @@ $(function() {
                 "1 in 5 billion",
                 "1 in 10 billion"
             ],
-            answer: "1 in 5 billion"
+            answer: "1 in 5 billion",
+            answerDescription: "Odds of being killed by space debris - 1 in 5 billion."
         },
         5: {
             id: 5,
@@ -61,7 +65,8 @@ $(function() {
                 "Simpsons",
                 "Pokemon"
             ],
-            answer: "Simpsons"
+            answer: "Simpsons",
+            answerDescription: "Simpsons is the longest-running American sitcom and the longest-running American animated program, and, in 2009, it surpassed Gunsmoke as the longest-running American scripted primetime television series."
         }
 
     };
@@ -71,24 +76,35 @@ $(function() {
             var h2Component = $("<h2>").attr("id", childId).attr("que-num", queNum).text(childText);
             $(parentContainer).html(h2Component);
         },
-        choiceClasses: "col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 choice",
+        choiceClasses: "col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 col-xs-10 col-xs-offset-1 ",
         addAnswers: function(parentContainer, childText, childId) {
-            var aComponent = $("<a>").attr("class", this.choiceClasses)
+            var aComponent = $("<a>").attr("class", triviaHtmlComponents.choiceClasses + " choice")
                 .attr("id", childId)
                 .attr("href", "#")
                 .attr("data-bs-hover-animate", "pulse") 
+                .attr("data-name", childText)
                 .text(childText);
             var h3Component = $("<h3>").html(aComponent);
             var divComponent = $("<div>").attr("class", "row").html(h3Component);
             $(parentContainer).append(divComponent);
         },
-        showAnswer: function(parentContainer, text) {
+        showAnswer: function(parentContainer, buttonId, buttonText, text) {
             $(parentContainer).html("");
             var divComponent = $("<div>");
             divComponent.attr("class", "jumbotron text-success");
             divComponent.css("background", "#2980ef");
             divComponent.html(text);
+            var aComponent = $("<a>").attr("class", triviaHtmlComponents.choiceClasses + " submit")
+                .attr("id", buttonId)
+                .attr("href", "#")
+                .attr("data-bs-hover-animate", "pulse")
+                .attr("data-name", buttonText) 
+                .text(buttonText);
+            var h3Component = $("<h3>").html(aComponent);
+            var buttonDivComponent = $("<div>");
+            buttonDivComponent.attr("class", "row").html(h3Component);
             $(parentContainer).append(divComponent);
+            $(parentContainer).append(buttonDivComponent);
         }
     };
 
@@ -98,6 +114,7 @@ $(function() {
         time: 0,
         startTimer: function() {
             timerInterval = setInterval(gameTimer.countTimer, 1000);
+            clearTimeout(timerTimeout);
             timerTimeout = setTimeout(triviaGame.checkAnswer, gameTimer.maxSec * 1000);
         },
         stopTimer: function() {
@@ -106,6 +123,7 @@ $(function() {
             clearTimeout(timerTimeout);
         },
         resetTimer: function() {
+            clearTimeout(timerTimeout);
             clearInterval(timerInterval);
             gameTimer.time = 0;
             gameTimer.updateHTML(gameTimer.maxSec);
@@ -113,7 +131,9 @@ $(function() {
         countTimer: function() {
             gameTimer.time++;
             console.log(gameTimer.time);
-            gameTimer.updateHTML(gameTimer.maxSec - gameTimer.time);
+            if ((gameTimer.maxSec - gameTimer.time) >= 0) {
+                gameTimer.updateHTML(gameTimer.maxSec - gameTimer.time);
+            }
         },
         updateHTML: function(data) {
             $("#timeRem").text(data);
@@ -141,43 +161,51 @@ $(function() {
                 console.log($(this).text());
                 gameTimer.stopTimer();
                 triviaGame.checkAnswer($(this).text());
-
+            });
+        },
+        submitClicked: function() {
+            $("#submit").on("click", function() {
+                triviaGame.loadData(data[(parseInt($(questionId).attr("que-num")) + 1)]);
+            });
+            $("#restart").on("click", function() {
+                triviaGame.startGame();
             });
         },
         checkAnswer: function(ansSelected) {
-            console.log(gameTimer.time);
+            var dataObj = data[$(questionId).attr("que-num")];
+            var msg = "";
+
             if (gameTimer.time >= 15) {
                 ranOutOfTime = true;
-                console.log("I am being callled");
-            }
-            if (ansSelected === data[$(questionId).attr("que-num")].answer) {
-                console.log("Your answer is correct");
-                ranOutOfTime = false;
-                correctCount++;
+                console.log(gameTimer.time);
+                gameTimer.stopTimer();
+                msg += "<h2>You are out of time, here's the answer...</h2><br>";
             } else {
-                console.log("Your answer is incorrect");
-                ranOutOfTime = true;
-                incorrectCount++;
+                if (ansSelected === dataObj.answer) {
+                    msg += "<h2>You are right...</h2><br>";
+                    ranOutOfTime = false;
+                    correctCount++;
+                } else {
+                    msg += "<h2>Oh, you guessed it wrong :(</h2><br>";
+                    ranOutOfTime = true;
+                    incorrectCount++;
+                }
             }
 
             if ((parseInt($(questionId).attr("que-num")) + 1) < 6) {
-                triviaGame.loadData(data[(parseInt($(questionId).attr("que-num")) + 1)]);
+                msg += "<h3>" + dataObj.answerDescription + "</h3>";
+                triviaHtmlComponents.showAnswer(ansContainerClass, "submit", "Okay", msg);
             } else {
-                //CODE GAME OVER HERE
-                var msgHTML = "<h2>Game Over</h2><br>" +
-                    "<h3>You answered " + correctCount + " correct </h3><br>" +
-                    "<h3>& " + incorrectCount + " wrong answers</h3><br>" +
-                    "";
-                triviaHtmlComponents.showAnswer(ansContainerClass, msgHTML);
-                console.log("Game over");
-                console.log("Correct answers : " + correctCount);
-                console.log("Incorrect answers : " + incorrectCount);
-
+                msg = "<h2>Game Over</h2><br>" +
+                    "<h3>You answered " + correctCount + " correct & " + incorrectCount + " wrong answers</h3><br>";
+                triviaHtmlComponents.showAnswer(ansContainerClass, "restart", "Restart", msg);
             }
-
+            triviaGame.submitClicked();
         },
         startGame: function() {
+
             this.loadData(data[1]);
+
         }
     };
 
