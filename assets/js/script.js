@@ -67,8 +67,65 @@ $(function() {
             ],
             answer: "Simpsons",
             answerDescription: "Simpsons is the longest-running American sitcom and the longest-running American animated program, and, in 2009, it surpassed Gunsmoke as the longest-running American scripted primetime television series."
+        },
+        6: {
+            id: 6,
+            question: "How many dimples are there on a regular golf ball?",
+            choices: [
+                "418",
+                "377",
+                "294",
+                "336"
+            ],
+            answer: "336",
+            answerDescription: "There are 336 dimples on a golf ball."
+        },
+        7: {
+            id: 7,
+            question: "Coulrophobia means fear of what?",
+            choices: [
+                "Jews",
+                "Sacred Things",
+                "Clowns",
+                "Old People"
+            ],
+            answer: "Clowns",
+            answerDescription: "Coulrophobia is fear of Clowns."
+        },
+        8: {
+            id: 8,
+            question: "Every year, over 8,800 people injure themselves with what apparently harmless, tiny object?",
+            choices: [
+                "Knife",
+                "Pencil",
+                "Baseball bat",
+                "Toothpick"
+            ],
+            answer: "Toothpick",
+            answerDescription: "8800 people injure themselves with a Toothpick."
+        },
+        9: {
+            id: 9,
+            question: "How many pounds of pressure do you need to rip off your ear?",
+            choices: ["17",
+                "7",
+                "2",
+                "11"
+            ],
+            answer: "7",
+            answerDescription: "7 pounds pressure can rip off your ear."
+        },
+        10: {
+            id: 10,
+            question: "At what temperature are Fahrenheit and Celsius the same?",
+            choices: ["-40",
+                "50",
+                "0",
+                "92"
+            ],
+            answer: "-40",
+            answerDescription: "At -40 degrees Fahrenheit and celebration are the same"
         }
-
     };
 
     var triviaHtmlComponents = {
